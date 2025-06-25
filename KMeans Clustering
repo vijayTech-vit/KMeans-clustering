@@ -1,0 +1,19 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+data = pd.read_csv(r'C:\Users\vijay_380drwx\Downloads\First Notebook\Mall_Customers.csv')
+print(data.head())
+X = data[['CustomerID', 'Spending Score (1-100)']].values
+k = 3
+kmeans = KMeans(n_clusters=k, random_state=0)
+kmeans.fit(X)
+labels = kmeans.labels_
+centroids = kmeans.cluster_centers_
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
+plt.scatter(centroids[:, 0], centroids[:, 1], s=200, c='red', marker='X', label='Centroids')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+plt.title('K-Means Clustering')
+plt.legend()
+plt.show()
